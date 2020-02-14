@@ -1,6 +1,6 @@
 # Lightning Network
 
-pre-configured, dockerized lightning network small cluster, using lnd and btcd
+Pre-configured, dockerized lightning network small cluster, using lnd and btcd
 in dev mode.
 
 ## Building
