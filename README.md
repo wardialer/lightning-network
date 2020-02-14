@@ -13,7 +13,7 @@ docker build -f Dockerfile.lnd -t tutorial/lnd .
 ```
 
 ```bash
-docker build -f Dockerfile.btcd -t tutorial/lnd .
+docker build -f Dockerfile.btcd -t tutorial/btcd .
 ```
 
 ## Usage
