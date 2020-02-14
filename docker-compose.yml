@@ -1,43 +1,30 @@
 version: "3"
 
 services:
-
   btcd:
     image: tutorial/btcd
     container_name: btcd
     hostname: btcd
-    ports:
-      - "8333:8333"
-      - "8334:8334"
-      - "18333:18333"
-      - "18334:18334"
-      - "18555:18555"
-      - "18556:18556"
-      - "28901:28901"
-      - "28902:28902"
     volumes:
-      - ./shared/:/root/.btcd/
-    entrypoint: btcd --txindex --simnet --rpcuser=kek --rpcpass=kek --debuglevel=info --rpclisten=0.0.0.0 --miningaddr=raB839J5g8iLuqzPLxwLYTYKFvRXMAB5qc
+      - shared:/rpc
+    entrypoint: btcd --txindex --simnet --rpcuser=kek --rpcpass=kek --rpccert=/rpc/rpc.cert --rpckey=/rpc/rpc.key --debuglevel=info --rpclisten=0.0.0.0 --miningaddr=rauPgBiRREcyUHiFqEooTf8mrNGUbiv3QJ
 
   alice:
     image: tutorial/lnd
     container_name: alice
     hostname: alice
-    ports:
-      - "9735:9735"
-      - "10009:10009"
     volumes:
-      - ./shared/:/root/.btcd/
-    entrypoint: lnd --debuglevel=info --bitcoin.simnet --bitcoin.active --bitcoin.node=btcd --btcd.rpcuser=kek --btcd.rpcpass=kek --btcd.rpchost=btcd
-    #--rpclisten=0.0.0.0:10001 --listen=0.0.0.0:10011 --restlisten=0.0.0.0:8001
+      - shared:/rpc
+    entrypoint: lnd --debuglevel=info --bitcoin.simnet --bitcoin.active --bitcoin.node=btcd --btcd.rpcuser=kek --btcd.rpcpass=kek --btcd.rpccert=/rpc/rpc.cert --btcd.rpchost=btcd
 
   bob:
     image: tutorial/lnd
     container_name: bob
     hostname: bob
-    #ports:
-    #  - "9735:9735"
-    #  - "10009:10009"
     volumes:
-      - ./shared/:/root/.btcd/
-    entrypoint: lnd --debuglevel=info --bitcoin.simnet --bitcoin.active --bitcoin.node=btcd --btcd.rpcuser=kek --btcd.rpcpass=kek --btcd.rpchost=btcd
+      - shared:/rpc
+    entrypoint: lnd --debuglevel=info --bitcoin.simnet --bitcoin.active --bitcoin.node=btcd --btcd.rpcuser=kek --btcd.rpcpass=kek --btcd.rpccert=/rpc/rpc.cert --btcd.rpchost=btcd
+
+volumes:
+  shared:
+    driver: local

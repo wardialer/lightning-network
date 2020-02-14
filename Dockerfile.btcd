@@ -22,7 +22,8 @@ RUN apk add --no-cache \
     ca-certificates \
 &&  mkdir "/rpc" "/root/.btcd" "/root/.btcctl" \
 &&  touch "/root/.btcd/btcd.conf" \
-&& "/bin/gencerts" --host="*"  --force
+&& "/bin/gencerts" --host="*" --directory="/rpc" --force
 
+VOLUME ["/rpc"]
 
 #ENTRYPOINT btcd --txindex --simnet --rpcuser=kek --rpcpass=kek --debuglevel=info --rpclisten=0.0.0.0
