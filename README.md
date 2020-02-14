@@ -30,6 +30,9 @@ and to stop them
 docker-compose down
 ```
 
+Use the command line to configure and manage the network nodes [...]
+(to be completed)
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 Please make sure to update tests as appropriate.
