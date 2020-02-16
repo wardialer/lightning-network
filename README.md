@@ -1,4 +1,6 @@
 # Lightning Network
+[![pipeline status](https://production.eng.it/gitlab/SEDM/blockchain/lightning-network/badges/master/pipeline.svg)](https://production.eng.it/gitlab/SEDM/blockchain/lightning-network/commits/master)
+
 
 Pre-configured, dockerized lightning network small cluster, using lnd and btcd
 in dev mode.
