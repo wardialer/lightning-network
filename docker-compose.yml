@@ -7,7 +7,7 @@ services:
     hostname: btcd
     volumes:
       - shared:/rpc
-    entrypoint: btcd --txindex --simnet --rpcuser=kek --rpcpass=kek --rpccert=/rpc/rpc.cert --rpckey=/rpc/rpc.key --debuglevel=info --rpclisten=0.0.0.0 --miningaddr=rauPgBiRREcyUHiFqEooTf8mrNGUbiv3QJ
+    entrypoint: btcd --txindex --simnet --rpcuser=kek --rpcpass=kek --rpccert=/rpc/rpc.cert --rpckey=/rpc/rpc.key --debuglevel=info --rpclisten=0.0.0.0 --miningaddr=${MINING_ADDRESS}
 
   alice:
     image: tutorial/lnd
