@@ -11,11 +11,11 @@ Use [docker build](https://docs.docker.com/engine/reference/commandline/build/)
 to build the container images.
 
 ```bash
-docker build -f Dockerfile.lnd -t tutorial/lnd .
+docker build -f Dockerfile.lnd -t eng/lnd .
 ```
 
 ```bash
-docker build -f Dockerfile.btcd -t tutorial/btcd .
+docker build -f Dockerfile.btcd -t eng/btcd .
 ```
 
 ## Usage
