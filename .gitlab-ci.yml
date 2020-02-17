@@ -11,9 +11,9 @@ before_script:
 build-master:
   stage: build
   script:
-    - docker build --pull -f Dockerfile.lnd -t "$LND_IMAGE" .
+    - docker build --pull -f Dockerfile.lnd -t "$CI_REGISTRY"/"$LND_IMAGE" .
     - docker push "$CI_REGISTRY"/"$LND_IMAGE"
-    - docker build --pull -f Dockerfile.btcd -t "$BTCD_IMAGE" .
+    - docker build --pull -f Dockerfile.btcd -t "$CI_REGISTRY"/"$BTCD_IMAGE" .
     - docker push "$CI_REGISTRY"/"$BTCD_IMAGE"
   only:
     - master
@@ -21,9 +21,9 @@ build-master:
 build:
   stage: build
   script:
-    - docker build --pull -f Dockerfile.lnd -t "$LND_IMAGE:$CI_COMMIT_REF_SLUG" .
+    - docker build --pull -f Dockerfile.lnd -t "$CI_REGISTRY"/"$LND_IMAGE:$CI_COMMIT_REF_SLUG" .
     - docker push "$CI_REGISTRY"/"$LND_IMAGE:$CI_COMMIT_REF_SLUG"
-    - docker build --pull -f Dockerfile.btcd -t "$BTCD_IMAGE:$CI_COMMIT_REF_SLUG" .
+    - docker build --pull -f Dockerfile.btcd -t "$CI_REGISTRY"/"$BTCD_IMAGE:$CI_COMMIT_REF_SLUG" .
     - docker push "$CI_REGISTRY"/"$BTCD_IMAGE:$CI_COMMIT_REF_SLUG"
   except:
     - master
