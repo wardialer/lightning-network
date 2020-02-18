@@ -70,8 +70,8 @@ deploy:
     - ls -l ./$RANCHER_COMPOSE_DIR/
     - alias rancher-compose=$PWD/$RANCHER_COMPOSE_DIR/rancher-compose
 
-    - rancher-compose --debug --project-name $STACK_NAME --url $RANCHER_URL --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY -f docker-compose.yml up --force-upgrade --pull -d
-    - rancher-compose --debug --project-name $STACK_NAME --url $RANCHER_URL --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY -f docker-compose.yml up --confirm-upgrade -d
+    - rancher-compose --debug --project-name $STACK_NAME --url $RANCHER_URL --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY up --force-upgrade --pull -d
+    - rancher-compose --debug --project-name $STACK_NAME --url $RANCHER_URL --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY up --confirm-upgrade -d
 
   variables:
     RANCHER_ACCESS_KEY: $RANCHER_EDREAM_PUBLIC
