@@ -71,7 +71,8 @@ deploy:
     - alias rancher-compose=$PWD/$RANCHER_COMPOSE_DIR/rancher-compose
 
     - rancher-compose --debug -p $STACK_NAME --url $RANCHER_URL --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY -e .env -f docker-compose.yml up --force-upgrade --pull -d
-    #- rancher-compose --debug --project-name $STACK_NAME --url $RANCHER_URL --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY up --confirm-upgrade -d
+    - rancher-compose --debug -p $STACK_NAME --url $RANCHER_URL --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY -e .env -f docker-compose.yml up --confirm-upgrade -d
   environment: "Default"
   only:
     - develop
+    - master
