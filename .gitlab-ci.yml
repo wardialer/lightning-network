@@ -79,4 +79,4 @@ deploy:
     RANCHER_SECRET_KEY: $RANCHER_EDREAM_PRIVATE
   environment: "Default"
   only:
-    -develop
+    - develop
