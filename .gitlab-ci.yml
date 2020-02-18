@@ -2,7 +2,7 @@
 image: docker:latest
 
 services:
-  - docker:dind
+  - docker:18.09.7-dind
 
 variables:
   CI_REGISTRY_USER: "username"
