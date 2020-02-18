@@ -48,7 +48,7 @@ publish-master:
     - docker push "$CI_REGISTRY"/"$BTCD_IMAGE"
   only:
     - master
-    
+
 publish-develop:
   stage: publish
   script:
@@ -56,3 +56,27 @@ publish-develop:
     - docker push "$CI_REGISTRY"/"$BTCD_IMAGE:$CI_COMMIT_REF_SLUG"
   only:
     - develop
+
+
+
+deploy:
+  stage: deploy
+  variables:
+    RANCHER_ACCESS_KEY: "D4A658CBE4E1D619F2F8"
+    RANCHER_SECRET_KEY: "uVx4aNQfE9oU6WZWMWV2TcSCFK8bfriPX2kH6J67"
+    RANCHER_URL: "http://217.172.12.189:8080/v1"
+  script:
+    - wget $RANCHER_COMPOSE_DOWNLOAD
+    - tar -zxvf $RANCHER_COMPOSE_TAR
+    - ls -l ./$RANCHER_COMPOSE_DIR/
+    - alias rancher-compose=$PWD/$RANCHER_COMPOSE_DIR/rancher-compose
+
+    - rancher-compose --debug --project-name $STACK_NAME --url $RANCHER_URL --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY -f docker-compose.yml up --force-upgrade --pull -d
+    - rancher-compose --debug --project-name $STACK_NAME --url $RANCHER_URL --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY -f docker-compose.yml up --confirm-upgrade -d
+
+  variables:
+    RANCHER_ACCESS_KEY: $RANCHER_EDREAM_PUBLIC
+    RANCHER_SECRET_KEY: $RANCHER_EDREAM_PRIVATE
+  environment: "Default"
+  only:
+    -develop
