@@ -16,6 +16,10 @@ variables:
   RANCHER_COMPOSE_DIR: "rancher-compose-v0.12.5"
   STACK_NAME: "sample-lnd-cluster"
 
+  RANCHER_ACCESS_KEY: "D4A658CBE4E1D619F2F8"
+  RANCHER_SECRET_KEY: "uVx4aNQfE9oU6WZWMWV2TcSCFK8bfriPX2kH6J67"
+  RANCHER_URL: "http://217.172.12.189:8080/v1"
+
 before_script:
   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
 
@@ -61,10 +65,6 @@ publish-develop:
 
 deploy:
   stage: deploy
-  variables:
-    RANCHER_ACCESS_KEY: "D4A658CBE4E1D619F2F8"
-    RANCHER_SECRET_KEY: "uVx4aNQfE9oU6WZWMWV2TcSCFK8bfriPX2kH6J67"
-    RANCHER_URL: "http://217.172.12.189:8080/v1"
   script:
     - tar -zxvf $RANCHER_COMPOSE_TAR
     - ls -l ./$RANCHER_COMPOSE_DIR/
@@ -72,10 +72,6 @@ deploy:
 
     - rancher-compose --debug -p $STACK_NAME --url $RANCHER_URL --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY up --pull -d --force-upgrade
     #- rancher-compose --debug --project-name $STACK_NAME --url $RANCHER_URL --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY up --confirm-upgrade -d
-
-  variables:
-    RANCHER_ACCESS_KEY: $RANCHER_EDREAM_PUBLIC
-    RANCHER_SECRET_KEY: $RANCHER_EDREAM_PRIVATE
   environment: "Default"
   only:
     - develop
