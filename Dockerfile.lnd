@@ -6,7 +6,7 @@ RUN apk add --no-cache --update alpine-sdk \
     git \
     make
 
-RUN go get -d github.com/lightningnetwork/lnd
+RUN git clone https://github.com/lightningnetwork/lnd.git /go/src/github.com/lightningnetwork/lnd
 WORKDIR $GOPATH/src/github.com/lightningnetwork/lnd
 RUN make \
 &&  make install tags="signrpc walletrpc chainrpc invoicesrpc routerrpc"
