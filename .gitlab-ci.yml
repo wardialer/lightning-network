@@ -5,8 +5,15 @@ image: docker:latest
 services:
   - docker:dind
 
+variables:
+  CI_REGISTRY_USER: "username"
+  CI_REGISTRY_PASSWORD: "password"
+  CI_REGISTRY: "localhost:5000"
+  LND_IMAGE: "eng/lnd"
+  BTCD_IMAGE: "eng/btcd"
+
 before_script:
-  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" localhost:5000
+  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
 
 build-master:
   stage: build
