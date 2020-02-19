@@ -2,7 +2,7 @@ version: "2"
 
 services:
   btcd:
-    image: localhost:5000/eng/btcd
+    image: eng/btcd
     container_name: btcd
     hostname: btcd
     volumes:
@@ -10,7 +10,7 @@ services:
     entrypoint: btcd --txindex --simnet --rpcuser=kek --rpcpass=kek --rpccert=/rpc/rpc.cert --rpckey=/rpc/rpc.key --debuglevel=info --rpclisten=0.0.0.0 --miningaddr=${MINING_ADDRESS}
 
   alice:
-    image: localhost:5000/eng/lnd
+    image: eng/lnd
     container_name: alice
     hostname: alice
     volumes:
@@ -18,7 +18,7 @@ services:
     entrypoint: lnd --debuglevel=info --bitcoin.simnet --bitcoin.active --bitcoin.node=btcd --btcd.rpcuser=kek --btcd.rpcpass=kek --btcd.rpccert=/rpc/rpc.cert --btcd.rpchost=btcd
 
   bob:
-    image: localhost:5000/eng/lnd
+    image: eng/lnd
     container_name: bob
     hostname: bob
     volumes:
