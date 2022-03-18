@@ -4,7 +4,7 @@ RUN apk add --no-cache git gcc musl-dev
 WORKDIR $GOPATH/src/github.com/btcsuite/btcd
 RUN git clone https://github.com/btcsuite/btcd.git . &&  GO111MODULE=on go install -v . ./cmd/...
 
-FROM alpine as final
+FROM alpine:3.15 as final
 
 EXPOSE 8333 8334
 EXPOSE 18333 18334
